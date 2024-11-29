@@ -6,6 +6,7 @@ const MultiControll = () =>{
         lname: "",
         email: "",
         password: "",
+        hobbie: ""
     }
     const [inputForm, setIntpuForm] = useState(intialState);
     const [errors, setErrors] = useState({});
@@ -34,6 +35,10 @@ const MultiControll = () =>{
         }
         if(inputForm.password === ""){
             formErrors.password = "* Password is Required."
+        }
+
+        if(inputForm.hobbie === ""){
+            formErrors.hobbie = "* Hobbie is Required"
         }
             setErrors(formErrors);
         
@@ -80,6 +85,10 @@ const MultiControll = () =>{
                 <label>Password: </label>
                 <input type="text" name="password" value={inputForm.password} onChange={handelInput}/>
                 {errors.password ? <i>{errors.password}</i> : ''}
+                <br/>
+                <label>hobbie: </label>
+                <input type="text" name="hobbie" value={inputForm.hobbie} onChange={handelInput}/>
+                {errors.hobbie ? <i>{errors.hobbie}</i> : ""}
                 <br/>
                 <button type="submit"> Submit</button>
             </form>

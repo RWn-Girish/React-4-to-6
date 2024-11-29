@@ -8,6 +8,7 @@ import Controll from './components/Controlled/Controll'
 import UnControll from './components/Controlled/Uncontroll'
 import MultiControll from './components/Controlled/multiControll';
 import HOC from './components/HOC'
+import Boot from './components/Boot'
 
 const HOCApp = HOC(ListComp);
 
@@ -31,8 +32,9 @@ function App() {
       <DynamicComp list={list} /> */}
       {/* <Controll />
       <UnControll /> */}
-      {/* <MultiControll /> */}
-      <HOCApp isLoading={isLoading} list={list} />
+      <MultiControll />
+      {/* <HOCApp isLoading={isLoading} list={list} /> */}
+      {/* <Boot /> */}
     </React.Fragment>
   )
 }
