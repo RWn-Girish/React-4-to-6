@@ -14,7 +14,7 @@ const Employee = () => {
         email: "",
         password: ""
     });
-
+    const [isEdit, setIsEdit] = useState(false);
     const [storage, setStorage] = useState(getData());
 
     const handelChange = (e) => {
@@ -25,9 +25,23 @@ const Employee = () => {
 
     const handelSubmit = (e) => {
         e.preventDefault();
-        console.log(inputForm);
-        let id = Math.floor(Math.random() * 10000);
-        setStorage([...storage, { ...inputForm, id: id }]);
+        // console.log(inputForm);
+
+        if(!isEdit){
+            let id = Math.floor(Math.random() * 10000);
+            setStorage([...storage, { ...inputForm, id: id }]);
+        }else{
+            const updateRec = storage.map((emp) => {
+                if(emp.id === inputForm.id){
+                    return inputForm
+                }else{
+                    return emp;
+                }
+            })
+            setStorage(updateRec);
+            setIsEdit(false)
+        }
+
         setInputForm({
             id: "",
             firstName: "",
@@ -35,6 +49,11 @@ const Employee = () => {
             email: "",
             password: ""
         })
+    }
+    const handelEdit = (id) => {
+        const empRec = (storage.find((emp) => emp.id == id));
+        setInputForm(empRec);
+        setIsEdit(true);
     }
 
     const handelDelete = (id) =>{
@@ -98,7 +117,7 @@ const Employee = () => {
                         <Form.Label column sm="2">
                         </Form.Label>
                         <Col sm="10">
-                            <Button type="submit" variant="primary">Add Employee</Button>
+                            <Button type="submit" variant="primary">{isEdit ? "Update":"Add"} Employee</Button>
                         </Col>
                     </Form.Group>
                 </Form>
@@ -125,7 +144,7 @@ const Employee = () => {
                                     <td>{emp.lastName}</td>
                                     <td>{emp.email}</td>
                                     <td>{emp.password}</td>
-                                    <td><button>Edit</button> || <button onClick={ ()=> handelDelete(emp.id)}>Delete</button></td>
+                                    <td><button onClick={()=>handelEdit(emp.id)}>Edit</button> || <button onClick={ ()=> handelDelete(emp.id)}>Delete</button></td>
                                 </tr>
                             ))
                         }
