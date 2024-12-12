@@ -20,7 +20,7 @@ const Eventhandel = () =>{
     return (
         <div className={isValid ? 'lightTheme' : 'darkTheme' }>
             {/* <input type="text" value={name} onChange={(e)=>handelChange(e)} onBlur={handelBlur} required/> */}
-            <h3>Hello Guys</h3>
+            <h3>Hello Guys {name}</h3>
             <button onClick={()=>handelClick('Anushka')} >{isValid ? "Convert Dark Mode" : "Convert Light Mode"}</button>
         </div>
     )

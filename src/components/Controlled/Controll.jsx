@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 const Controll = () =>{
+
+    const navigate = useNavigate();
     const [fname, setFname] = useState("");
     const [email, setEmail] = useState("");
     // state using handel react
@@ -17,10 +20,16 @@ const Controll = () =>{
         console.log('Email: => ', email);
         setEmail("")
         setFname("")
+        navigate('/')
+    }
+
+    const handelClick = () => {
+            navigate('/120')
     }
     return (
         <>
             <h1>Controll Components</h1>
+            <button onClick={handelClick}>Home</button>
             <form onSubmit={(e)=>handelSubmit(e)}>
                 <label>Name: </label>
                 <input type="text" name="fullname" value={fname} onChange={handelName} /><br/>

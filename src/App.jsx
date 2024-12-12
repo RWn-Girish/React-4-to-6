@@ -16,27 +16,28 @@ const HOCApp = HOC(ListComp);
 
 
 function App() {
-  const [list, setList] = useState(['Home','Work', 'About', 'Contace', 'Service'])
+  const [list, setList] = useState(['Home', 'Work', 'About', 'Contace', 'Service'])
 
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(()=>{
-      setTimeout(()=>{
-        setIsLoading(true)
-      }, 3000)
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(true)
+    }, 3000)
   }, [])
 
-  return(
+  return (
     <React.Fragment>
-    <Header />
-  <Routes>
-    <Route path='/' element={<UseState />} />
-    <Route path='/about' element={<Controll />} />
-    <Route path='/contact/123' element={<h1>Welcome To Contact Page</h1>} />
-    <Route path='/*' element={<h1>Page Not Found</h1>} />
-  </Routes>
+      <Header />
+      <Routes>
+        <Route path='/:id' element={<UseState />} />
+        <Route path='/about' element={<Controll />} />
+        <Route path='/contact' element={<h1>Welcome To Contact Page</h1>} />
+        <Route path='/' element={<Eventhandel />} />
+        <Route path='/*' element={<h1>Page Not Found</h1>} />
+      </Routes>
 
-    <h2>Fotter Section</h2>
+      <h2>Fotter Section</h2>
       {/* <UseState /> */}
       {/* <Eventhandel /> */}
       {/* <ListComp list={list} />

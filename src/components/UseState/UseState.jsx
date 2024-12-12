@@ -1,26 +1,28 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { Link, useParams } from "react-router";
 
-const UseState = ()=>{
+const UseState = () => {
+
+    const { id } = useParams();
     // console.log(useState());
     const [count, setCount] = useState(0);
     // const [name, setName] = useState("Hello")
 
-    const increment = () =>{
-        setCount(count+1)
+    const increment = () => {
+        setCount(count + 1)
         // setName("Red & White")
         // console.log("Count ===> ", count);
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log('Every time render...');
     })
-    useEffect(()=>{
+    useEffect(() => {
         document.title = `${count} times Clicked`
-    },[])
+    }, [])
     return (
         <div>
-            <h1>Hello, Red & White</h1>
+            <h1>Hello, Red & White {id}</h1>
             <h2>Count : {count}</h2>
             {/* <input type="text" value={name}/> */}
             <button onClick={increment}>Change</button>
