@@ -1,6 +1,10 @@
+import { useContext } from "react";
 import { Container, Navbar } from "react-bootstrap";
+import { CartContext } from "../Context/CartContex";
 
 const Header = () => {
+    const cart = useContext(CartContext);
+    console.log(cart.getCartData());
     return (
         <>
             <Container>
@@ -10,7 +14,7 @@ const Header = () => {
                         <Navbar.Toggle />
                         <Navbar.Collapse className="justify-content-end">
                             <Navbar.Text>
-                                Cart(0)
+                                Cart({cart.getCartData().length})
                             </Navbar.Text>
                         </Navbar.Collapse>
                     </Container>
