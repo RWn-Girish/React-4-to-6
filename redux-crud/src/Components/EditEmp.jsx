@@ -1,15 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Col, Container, Row, Form } from 'react-bootstrap'
-import { useDispatch } from 'react-redux';
-import { addNewEmp } from '../services/actions/employee.action';
+import { useDispatch, useSelector } from 'react-redux';
+import { addNewEmp, editEmp, singleEmp } from '../services/actions/employee.action';
 import generateUniqueId from "generate-unique-id";
-import { useNavigate } from "react-router"
+import { useNavigate, useParams } from "react-router"
 
 
-function AddEmp() {
+function EditEmp() {
 
+    const { id } = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const { employee } = useSelector(state => state.employeeReducer);
     const [inputForm, setInputForm] = useState({
         id: "",
         firstname: "",
@@ -27,18 +29,22 @@ function AddEmp() {
 
     const handelSubmit = (e) => {
         e.preventDefault();
-        let id = generateUniqueId({
-            length: 6,
-            useLetters: false
-        });
-        console.log("Form Submit", { ...inputForm, id });
-        dispatch(addNewEmp({ ...inputForm, id }))
+        console.log("Form Submit");
+        dispatch(editEmp(inputForm))
         navigate("/")
     }
+    useEffect(() => {
+        dispatch(singleEmp(id));
+    }, []);
+
+    useEffect(()=> {
+        setInputForm(employee);
+    }, [employee])
+
     return (
         <>
             <Container>
-                <h2 className="text-center mb-4">Add New Employee Details</h2>
+                <h2 className="text-center mb-4">Edit Employee Details</h2>
                 <Form onSubmit={handelSubmit}>
                     <Form.Group as={Row} className="mb-3" >
                         <Form.Label column sm="2">
@@ -81,6 +87,7 @@ function AddEmp() {
                                 name='gender'
                                 value={'Male'}
                                 onChange={handelChanged}
+                                checked= {inputForm.gender== "Male"}
                             />
                         </Col>
                         <Col sm="1">
@@ -90,6 +97,7 @@ function AddEmp() {
                                 name='gender'
                                 value={'Female'}
                                 onChange={handelChanged}
+                                checked= {inputForm.gender== "Female"}
                             />
                         </Col>
                         <Col sm="1"></Col>
@@ -104,7 +112,7 @@ function AddEmp() {
                         <Form.Label column sm="5">
                         </Form.Label>
                         <Col sm="5">
-                            <Button type="submit">Add Employee</Button>
+                            <Button type="submit">Edit Employee</Button>
                         </Col>
                     </Form.Group>
 
@@ -115,4 +123,4 @@ function AddEmp() {
     )
 }
 
-export default AddEmp
+export default EditEmp
