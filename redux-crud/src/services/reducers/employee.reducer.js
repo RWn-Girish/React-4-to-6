@@ -1,6 +1,7 @@
 const initalState = {
     employees: JSON.parse(localStorage.getItem('Emp')) || [],
     employee: null,
+    loading: false
 }
 
 
@@ -44,9 +45,18 @@ export const employeeReducer = (state = initalState, action) => {
             localStorage.setItem("Emp", JSON.stringify(updateData))
             return {
                 ...state,
-                employees: updateData
+                employees: updateData,
+                loading: false
             }
         }
+
+        case "GET_ALL_EMPLOYEES":{
+            let oldData = JSON.parse(localStorage.getItem('Emp'));
+            return {
+                ...state,
+                employees: oldData,
+                loading: true
+            }}
 
         default:
             return state;

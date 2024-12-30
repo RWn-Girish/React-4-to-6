@@ -1,14 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Button, Container, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
 import { useNavigate } from 'react-router';
-import { deleteEmp } from '../services/actions/employee.action';
+import { deleteEmp, getAllEmps } from '../services/actions/employee.action';
 
 function Home() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { employees } = useSelector(state => state.employeeReducer);
+    const { employees, loading } = useSelector(state => state.employeeReducer);
 
     const handelEdit = (id) => {
         navigate(`/edit/${id}`);
@@ -17,6 +17,10 @@ function Home() {
     const handelDelete = (id) => {
         dispatch(deleteEmp(id))
     }
+
+    useEffect(()=> {
+        dispatch(getAllEmps())
+    }, [loading])
     return (
         <>
             <Container>

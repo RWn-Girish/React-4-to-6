@@ -25,3 +25,10 @@ export const deleteEmp = (id) => {
         payload: id
     }
 }
+
+
+export const getAllEmps = () => {
+    return {
+        type: "GET_ALL_EMPLOYEES",
+    }
+}
