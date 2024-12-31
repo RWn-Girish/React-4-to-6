@@ -32,3 +32,27 @@ export const getAllEmps = () => {
         type: "GET_ALL_EMPLOYEES",
     }
 }
+
+export const loading = ()=> {
+    return {
+        type: "LOADING",
+    }
+}
+
+
+export const getAllEmpsAsync = (data) => {
+    return (dispatch) => {
+        console.log("data --->",data)
+        if(!data){
+            dispatch(loading());
+            setTimeout(()=> {
+                dispatch(getAllEmps());
+            }, 2000)
+        }else{
+            dispatch(getAllEmps());
+        }
+
+        
+    }
+
+}

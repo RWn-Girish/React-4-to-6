@@ -35,7 +35,8 @@ export const employeeReducer = (state = initalState, action) => {
             localStorage.setItem("Emp", JSON.stringify(updateData))
             return {
                 ...state,
-                employees: updateData
+                employees: updateData,
+                loading: true
             }
         }
 
@@ -55,8 +56,14 @@ export const employeeReducer = (state = initalState, action) => {
             return {
                 ...state,
                 employees: oldData,
-                loading: true
+                loading: false
             }}
+        
+            case "LOADING" : 
+            return {
+                ...state,
+                loading: true
+            } 
 
         default:
             return state;
