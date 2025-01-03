@@ -11,6 +11,7 @@ import HOC from './components/HOC'
 import Boot from './components/Boot'
 import { Route, Routes } from 'react-router'
 import Header from './components/Header'
+import Counter from './components/UseCallback/Counter'
 
 const HOCApp = HOC(ListComp);
 
@@ -27,17 +28,18 @@ function App() {
   }, [])
 
   return (
-    <React.Fragment>
+    <>
       <Header />
       <Routes>
         <Route path='/:id' element={<UseState />} />
         <Route path='/about' element={<Controll />} />
         <Route path='/contact' element={<h1>Welcome To Contact Page</h1>} />
-        <Route path='/' element={<Eventhandel />} />
+        <Route path='/' element={<Counter />} />
+        {/* <Route path='/' element={<Eventhandel />} /> */}
         <Route path='/*' element={<h1>Page Not Found</h1>} />
       </Routes>
 
-      <h2>Fotter Section</h2>
+      {/* <h2>Fotter Section</h2> */}
       {/* <UseState /> */}
       {/* <Eventhandel /> */}
       {/* <ListComp list={list} />
@@ -47,7 +49,7 @@ function App() {
       {/* <MultiControll /> */}
       {/* <HOCApp isLoading={isLoading} list={list} /> */}
       {/* <Boot /> */}
-    </React.Fragment>
+    </>
   )
 }
 
