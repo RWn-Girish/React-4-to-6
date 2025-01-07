@@ -1,0 +1,32 @@
+{
+  "employees": [
+    {
+      "id": "1",
+      "firstname": "John",
+      "lastname": "Peter",
+      "email": "john@test.in",
+      "contactNo": "",
+      "gender": "Male",
+      "DOB": ""
+    },
+    {
+      "id": "645605",
+      "firstname": "Jolly",
+      "lastname": "Peter",
+      "email": "jolly@test.in",
+      "contactNo": "12345",
+      "gender": "Female",
+      "DOB": "2025-01-09"
+    },
+    {
+      "id": "266386",
+      "firstname": "Virat",
+      "lastname": "Kohli",
+      "email": "v@test.in",
+      "contactNo": "",
+      "gender": "Male",
+      "DOB": ""
+    }
+  ],
+  "users": []
+}
