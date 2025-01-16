@@ -21,7 +21,9 @@ export const userReducer = (state = initailState, action) => {
             return {
                 ...state,
                 users: action.payload,
-                isLoading: false
+                isLoading: false,
+                isUpdated: false,
+                isCreated: false
             }
         case "GET_ALL_USER_REJ":
            

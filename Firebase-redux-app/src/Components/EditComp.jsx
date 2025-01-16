@@ -3,7 +3,7 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router";
 import { useDispatch, useSelector } from 'react-redux';
 import { singleUserAsync, updateUser, updateUserAsync } from "../services/actions/userAction";
-
+import { ToastContainer, toast } from 'react-toastify';
 const EditComp = () => {
     const { id } = useParams();
     const dispatch = useDispatch()
@@ -44,14 +44,19 @@ const EditComp = () => {
 
     useEffect(()=> {
         if(isUpdated)
-            navigate("/")
+         {
+            toast.success("Update Record!!!");
+            setTimeout(()=> {
+                navigate("/")
+            },1500);
+         }
     }, [isUpdated])
 
     return (
         <>
             <Container>
+            <ToastContainer  autoClose={2000} />
                 <Form onSubmit={handelSubmit}>
-
                     <Form.Group as={Row} className="mb-3" >
                         <Form.Label column sm="2">
                             Name:

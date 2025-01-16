@@ -3,6 +3,7 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from 'react-redux';
 import { createUserAsync } from "../services/actions/userAction";
+import { ToastContainer, toast } from 'react-toastify';
 
 const AddComp = () => {
     const dispatch = useDispatch()
@@ -30,12 +31,16 @@ const AddComp = () => {
 
     useEffect(()=> {
         if(isCreated){
-            navigate("/")
+            toast.success("User Added Success");
+            setTimeout(()=> {
+                navigate("/")
+            }, 2000);
         }
     }, [isCreated])
     return (
         <>
             <Container>
+            <ToastContainer  autoClose={2500} />
                 {errMSG ? <h3>{errMSG}</h3> : ""}
                 <Form onSubmit={handelSubmit}>
 

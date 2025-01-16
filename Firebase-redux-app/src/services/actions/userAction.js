@@ -1,5 +1,5 @@
 import axios from "axios";
-import { addDoc, collection, doc, getDocs, setDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "./../../config/firebaseConfig";
 
 export const getAllUser = (data) => {
@@ -80,8 +80,7 @@ export const getAllUserAsync = () => {
         let res = await getDocs(collection(db, 'users'))
         // console.log(res);
         res.forEach(rec => {
-            // console.log(rec.data());
-            result.push(rec.data());
+            result.push({id: rec.id, ...rec.data()});
         })
         dispatch(getAllUser(result))
     } catch (error) {
@@ -114,40 +113,63 @@ export const createUserAsync = (data) => {
 };
 
 export const deleteUserAsync = (id) => {
-  return (dispatch) => {
-    axios
-      .delete(`http://localhost:4141/users/${id}`)
-      .then((res) => {
-        dispatch(getAllUserAsync());
-      })
-      .catch((err) => {
-        dispatch(deleteUserRej(err.message));
-      });
+  return async (dispatch) => {
+    // axios
+    //   .delete(`http://localhost:4141/users/${id}`)
+    //   .then((res) => {
+    //     dispatch(getAllUserAsync());
+    //   })
+    //   .catch((err) => {
+    //     dispatch(deleteUserRej(err.message));
+    //   });
+
+    try {
+      await deleteDoc(doc(db, "users", `${id}`))
+      dispatch(getAllUserAsync());
+    } catch (error) {
+      dispatch(deleteUserRej(err.message));
+    }
   };
 };
 
 export const singleUserAsync = (id) => {
-  return (dispatch) => {
-    axios
-      .get(`http://localhost:4141/users/${id}`)
-      .then((res) => {
-        dispatch(singleUser(res.data));
-      })
-      .catch((err) => {
-        dispatch(deleteUserRej(err.message));
-      });
+  return async(dispatch) => {
+    // axios
+    //   .get(`http://localhost:4141/users/${id}`)
+    //   .then((res) => {
+    //     dispatch(singleUser(res.data));
+    //   })
+    //   .catch((err) => {
+    //     dispatch(deleteUserRej(err.message));
+    //   });
+
+   try {
+    let record = await getDoc(doc(db, "users", `${id}`));
+    let rec = record.data();
+    rec.id = record.id;
+    // console.log("Record => ",rec);
+    dispatch(singleUser(rec));
+   } catch (error) {
+    dispatch(deleteUserRej(err.message));
+   }
   };
 };
 
 export const updateUserAsync = (data) => {
-  return (dispatch) => {
-    axios
-      .put(`http://localhost:4141/users/${data.id}`, data)
-      .then((res) => {
-        dispatch(updateUser());
-      })
-      .catch((err) => {
-        dispatch(deleteUserRej(err.message));
-      });
+  return async(dispatch) => {
+    // axios
+    //   .put(`http://localhost:4141/users/${data.id}`, data)
+    //   .then((res) => {
+    //     dispatch(updateUser());
+    //   })
+    //   .catch((err) => {
+    //     dispatch(deleteUserRej(err.message));
+    //   });
+    try {
+      await updateDoc(doc(db, "users", `${data.id}`), data)
+      dispatch(updateUser());
+    } catch (error) {
+      dispatch(deleteUserRej(err.message));
+    }
   };
 };

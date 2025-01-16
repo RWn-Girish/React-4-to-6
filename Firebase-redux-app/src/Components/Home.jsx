@@ -24,10 +24,20 @@ const Home = () => {
         {errMSG ? <p>{errMSG}</p> : ""}
             <h3>Home Page</h3>
             {isLoading ? <h3>Loading......</h3> : <Table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th colSpan={2}>Action</th>
+                    </tr>
+                </thead>
                 <tbody>
                     {
                         users.map((user, i)=> (
                             <tr key={i}>
+                                <td>{user.id}</td>
                                 <td>
                                     {user.fname}
                                 </td>
