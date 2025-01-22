@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { signInAsync, signUpAsync } from "../../services/actions/auth.action";
+import { googleLoginAsync, signInAsync, signUpAsync } from "../../services/actions/auth.action";
 import { Link, useNavigate } from "react-router";
 
 const SignIn = () => {
@@ -25,6 +25,10 @@ const SignIn = () => {
             dispatch(signInAsync(signInInput))
     }
 
+    const googleLogin = () => {
+        dispatch(googleLoginAsync());
+    }
+
     useEffect(()=> {
         if(user){
             navigate("/")
@@ -43,9 +47,12 @@ const SignIn = () => {
             <input type="password" name="password" value={signInInput.password} onChange={handleChange}  />
             <br />
             <br />
-            
             <button type="submit">SignIn</button>
         </form>
+            <br />
+            <button onClick={googleLogin} >Google SignIN</button>
+            <br />
+            <br />
         <p>Create New Account? <Link to={"/signup"}>SignUP</Link></p>
         
         </>

@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import { auth } from "../../config/firebaseConfig";
 
 
@@ -93,5 +93,22 @@ export const signOutAync = () =>{
             console.log(err);
             dispatch(loginReject('Network Issue'))
         }
+    }
+}
+
+
+export const googleLoginAsync = () => {
+    return (dispatch) => {
+        let provider = new GoogleAuthProvider();
+
+        signInWithPopup(auth, provider)
+        .then((res)=> {
+            console.log(res.user);
+            dispatch(loginSuccess(res.user))
+        })
+        .catch((err)=> {
+            console.log(err);
+            dispatch(loginReject('Network Issue'))
+        })
     }
 }

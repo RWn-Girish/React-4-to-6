@@ -19,7 +19,7 @@ const Header = () => {
                 <Container>
                     <Navbar.Brand href="/">Navbar with text</Navbar.Brand>
                     <Navbar.Toggle />
-                    <Navbar.Collapse className="justify-content-end">
+                    <Navbar.Collapse className="justify-content-center">
                         <Nav.Link href="/add">Add</Nav.Link>
                     </Navbar.Collapse>
                     {user ? <button onClick={handleLogOut}>LogOut</button> : <button onClick={handleLogin}>SignIn</button>}
